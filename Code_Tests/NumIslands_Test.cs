@@ -19,7 +19,25 @@ namespace Code_Tests
             int expected = 1;
 
             //Assert
-            int actual = BFS.NumIslands(inputGrid);
+            int actual = BFS.NumIslandsBFS(inputGrid);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Test2()
+        {
+            //Arrange
+            char[,] inputGrid = new char[4, 5]{
+                {'1','1','0','0','0' },
+                {'1','1','0','0','0' },
+                {'0','0','1','0','0' },
+                {'0','0','0','1','1' }
+            };
+            int expected = 3;
+
+            //Assert
+            int actual = BFS.NumIslandsBFS(inputGrid);
 
             Assert.AreEqual(expected, actual);
         }
