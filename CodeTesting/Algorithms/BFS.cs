@@ -10,7 +10,7 @@ namespace Code_Challenges.Algorithms
           An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
           You may assume all four edges of the grid are all surrounded by water.
         */
-        public static int NumIslands(char[,] grid)
+        public static int NumIslandsBFS(char[,] grid)
         {
             int rows = grid.GetLength(0);
             if (rows == 0) return -1;
@@ -78,10 +78,10 @@ namespace Code_Challenges.Algorithms
                         }
                     }
                 }
-                return numIslands;
+                
             }
 
-            return -1;
+            return numIslands;
         }
     }
 }
