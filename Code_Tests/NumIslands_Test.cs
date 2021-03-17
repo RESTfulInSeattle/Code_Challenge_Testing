@@ -7,7 +7,7 @@ namespace Code_Tests
     public class NumIslands_Test
     {
         [TestMethod]
-        public void Test1()
+        public void BFS_Test1()
         {
             //Arrange
             char[,] inputGrid = new char[4,5]{
@@ -25,7 +25,7 @@ namespace Code_Tests
         }
 
         [TestMethod]
-        public void Test2()
+        public void BFS_Test2()
         {
             //Arrange
             char[,] inputGrid = new char[4, 5]{
@@ -38,6 +38,42 @@ namespace Code_Tests
 
             //Assert
             int actual = BFS.NumIslandsBFS(inputGrid);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DFS_Test1()
+        {
+            //Arrange
+            char[,] inputGrid = new char[4, 5]{
+                { '1','1','1','1','0' },
+                {'1','1','0','1','0' },
+                {'1','1','0','0','0' },
+                {'0','0','0','0','0' }
+            };
+            int expected = 1;
+
+            //Assert
+            int actual = DFS.NumIslandsDFS(inputGrid);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DFS_Test2()
+        {
+            //Arrange
+            char[,] inputGrid = new char[4, 5]{
+                {'1','1','0','0','0' },
+                {'1','1','0','0','0' },
+                {'0','0','1','0','0' },
+                {'0','0','0','1','1' }
+            };
+            int expected = 3;
+
+            //Assert
+            int actual = DFS.NumIslandsDFS(inputGrid);
 
             Assert.AreEqual(expected, actual);
         }
