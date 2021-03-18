@@ -18,16 +18,14 @@ namespace Code_Challenges
 
             for(int i=0;i<count;i++)
             {
-                if(nums[i]==0 && i!= count-1)
+                if(nums[i]==0)
                 {
-                    int last = nums[count - 1];
-                    nums[count - 1] = nums[i];
-
-                    for(int j=i;j<count-2;j++)
+                    for(int j = i+1;j<count;j++)
                     {
-                        nums[j] = nums[j + 1];
+                        int prev = nums[j];
+                        nums[i] = prev;
+                        nums[j] = 0;
                     }
-                    nums[count - 2] = last;
                 }
             }
 
