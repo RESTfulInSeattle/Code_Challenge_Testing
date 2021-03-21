@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System;
 
-namespace Code_Challenges
+namespace Code_Challenges.PracticeProblems
 {
     public static class CountingValleys
     {
