@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Code_Challenges;
+using Code_Challenges.PracticeProblems;
 
 namespace Code_Tests
 {

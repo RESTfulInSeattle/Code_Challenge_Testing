@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Code_Challenges
+namespace Code_Challenges.PracticeProblems
 {
     public class MoveZeroes
     {
@@ -23,7 +23,7 @@ namespace Code_Challenges
                     for(int j = i+1;j<count;j++)
                     {
                         int prev = nums[j];
-                        nums[i] = prev;
+                        nums[j-1] = prev;
                         nums[j] = 0;
                     }
                 }
