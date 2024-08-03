@@ -18,9 +18,10 @@ namespace Code_Tests
             };
             int expected = 1;
 
-            //Assert
+            //Act
             int actual = BFS.NumIslandsBFS(inputGrid);
 
+            //Assert
             Assert.AreEqual(expected, actual);
         }
 

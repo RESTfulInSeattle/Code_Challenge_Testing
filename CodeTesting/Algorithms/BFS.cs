@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,69 +17,79 @@ namespace Code_Challenges.Algorithms
             if (rows == 0) return -1;
             int cols = grid.GetLength(1);
 
-            Queue<int[,]> queue = new Queue<int[,]>();
-
             int numIslands = 0;
 
-            //Enqueue 1 as a root, changing to 0 to note it's been visited
-            for(int row=0; row<rows; row++)
-            {
-                for(int col=0; col<cols; col++)
-                {
-                    if(grid[row,col]=='1')
-                    {
-                        int[,] node = new int[1,2];
-                        node[0, 0] = row;
-                        node[0, 1] = col;
+            Queue<int[,]> nodeQueue = new Queue<int[,]>();
 
-                        queue.Enqueue(node);
-                        grid[row,col] = '0';
+            //Enqueue 1 as a root, changing to 0 to note it's been visited
+            for(int gridRow = 0; gridRow<rows; gridRow++)
+            {
+                for(int gridCol = 0; gridCol<cols; gridCol++)
+                {
+                    if (grid[gridRow,gridCol]=='1')
+                    {
+                        int[,] node = new int[1, 2];
+                        node[0, 0] = gridRow;
+                        node[0, 1] = gridCol;
+
+                        nodeQueue.Enqueue(node);
+                        grid[gridRow, gridCol] = '0';
 
                         numIslands++;
 
-                        //walk the surrounding nodes (brute force method, doesn't look that good)
-                        while (queue.Count > 0)
+                        while(nodeQueue.Count>0)
                         {
-                            int[,] curNode = queue.Dequeue();
-                            int r = curNode[0, 0];
-                            int c = curNode[0, 1];
+                            int[,] curNode = nodeQueue.Dequeue();
 
-                            if (r > 0 && grid[r - 1, c] == '1')
+                            int curRow = curNode[0, 0];
+                            int curCol = curNode[0, 1];
+
+                            //Left
+                            if (curRow>0 && grid[curRow-1,curCol]=='1')
                             {
-                                int[,] n = new int[1, 2];
-                                n[0, 0] = r - 1;
-                                n[0, 1] = c;
-                                queue.Enqueue(n);
-                                grid[r - 1, c] = '0';
+                                int[,] newNode = new int[1, 2];
+                                newNode[0, 0] = curRow - 1;
+                                newNode[0, 1] = curCol;
+                                //Add node to queue and mark as visited
+                                nodeQueue.Enqueue(newNode);
+                                grid[curRow - 1, curCol] = '0';
                             }
-                            if (r < rows - 1 && grid[r + 1, c] == '1')
+
+                            //Right
+                            if(curRow<rows-1 && grid[curRow + 1, curCol] == '1')
                             {
-                                int[,] n = new int[1, 2];
-                                n[0, 0] = r + 1;
-                                n[0, 1] = c;
-                                queue.Enqueue(n);
-                                grid[r + 1, c] = '0';
+                                int[,] newNode = new int[1, 2];
+                                newNode[0, 0] = curRow + 1;
+                                newNode[0, 1] = curCol;
+                                //Add node to queue and mark as visited
+                                nodeQueue.Enqueue(newNode);
+                                grid[curRow + 1, curCol] = '0';
                             }
-                            if (c > 0 && grid[c - 1, r] == '1')
+
+                            //Up
+                            if (curCol>1 && grid[curRow, curCol-1] == '1')
                             {
-                                int[,] n = new int[1, 2];
-                                n[0, 0] = r;
-                                n[0, 1] = c-1;
-                                queue.Enqueue(n);
-                                grid[r, c - 1] = '0';
+                                int[,] newNode = new int[1, 2];
+                                newNode[0, 0] = curRow;
+                                newNode[0, 1] = curCol-1;
+                                //Add node to queue and mark as visited
+                                nodeQueue.Enqueue(newNode);
+                                grid[curRow - 1, curCol-1] = '0';
                             }
-                            if (c < cols - 1 && grid[r, c + 1] == '1')
+
+                            //Down
+                            if(curCol<cols-1 &&  grid[curRow, curCol+1] == '1')
                             {
-                                int[,] n = new int[1, 2];
-                                n[0, 0] = r;
-                                n[0, 1] = c+1;
-                                queue.Enqueue(n);
-                                grid[r, c + 1] = '0';
+                                int[,] newNode = new int[1, 2];
+                                newNode[0, 0] = curRow;
+                                newNode[0, 1] = curCol+1;
+                                //Add node to queue and mark as visited
+                                nodeQueue.Enqueue(newNode);
+                                grid[curRow, curCol+1] = '0';
                             }
                         }
                     }
                 }
-                
             }
 
             return numIslands;
