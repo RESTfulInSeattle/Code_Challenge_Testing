@@ -10,7 +10,7 @@ namespace Code_Challenges.Algorithms
          An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
          You may assume all four edges of the grid are all surrounded by water.
        */
-        public static int NumIslandsDFS(char[,] grid)
+        public static int NumIslandsDFS_Stack(char[,] grid)
         {
             int rows = grid.GetLength(0);
             if (rows == 0) return -1;
@@ -94,21 +94,30 @@ namespace Code_Challenges.Algorithms
             return numIslands;
         }
 
-        public static int NumIslandsDFS_Recursive(char[,] grid)
+
+
+
+        public static int NumIslandsDFS(char[,] grid)
         {
-            int rows = grid.GetLength(0);
-            if (rows == 0) return -1;
-            int cols = grid.GetLength(1);
+            int numRows = grid.GetLength(0);
+            if (numRows == 0) return -1;
+            int numCols = grid.GetLength(1);
+
             int numIslands = 0;
 
-            for(int row = 0; row<rows;row++)
+            for (int curRow = 0; curRow < numRows; curRow++)
             {
-                for(int col=0;col<cols;col++)
+                for (int curCol = 0; curCol < numCols; curCol++)
                 {
-                    if(grid[row,col]=='1')
+                    if (grid[curRow, curCol] == '1')
                     {
+                        int[,] curNode = new int[1, 2];
+                        curNode[0, 0] = curRow;
+                        curNode[0, 1] = curCol;
+
                         numIslands++;
-                        DFS_Recursive(ref grid, row, col);
+
+                        VisitNeighborsRecursive(curNode, grid);
                     }
                 }
             }
@@ -116,18 +125,57 @@ namespace Code_Challenges.Algorithms
             return numIslands;
         }
 
-        private static void DFS_Recursive(ref char[,] grid, int row, int col)
+        private static void VisitNeighborsRecursive(int[,] curNode, char[,] grid)
         {
-            int rows = grid.GetLength(0);
-            int cols = grid.GetLength(1);
+            int curRow = curNode[0, 0];
+            int curCol = curNode[0, 1];
 
-            if (row < 0 || col < 0 || row >= rows || col >= cols || grid[row, col] == '0') return;
+            int numRows = grid.GetLength(0);
+            int numCols = grid.GetLength(1);
 
-            grid[row, col] = '0';
-            DFS_Recursive(ref grid, row - 1, col);
-            DFS_Recursive(ref grid, row + 1, col);
-            DFS_Recursive(ref grid, row, col-1);
-            DFS_Recursive(ref grid, row, col+1);
+            grid[curRow, curCol] = '0';
+
+            //Left
+            if (curRow > 1 && grid[curRow - 1, curCol] == '1')
+            {
+                int[,] node = new int[1, 2];
+                node[0, 0] = curRow - 1;
+                node[0, 1] = curCol;
+
+                VisitNeighborsRecursive(node, grid);
+            }
+
+            //Right
+            if (curRow < numRows - 1 && grid[curRow + 1, curCol] == '1')
+            {
+                int[,] node = new int[1, 2];
+                node[0, 0] = curRow + 1;
+                node[0, 1] = curCol;
+
+                VisitNeighborsRecursive(node, grid);
+            }
+
+            //Up
+            if (curCol > 1 && grid[curRow, curCol - 1] == '1')
+            {
+                int[,] node = new int[1, 2];
+                node[0, 0] = curRow;
+                node[0, 1] = curCol - 1;
+
+                VisitNeighborsRecursive(node, grid);
+            }
+
+            //Down
+            if (curCol < numCols - 1 && grid[curRow, curCol + 1] == '1')
+            {
+                int[,] node = new int[1, 2];
+                node[0, 0] = curRow;
+                node[0, 1] = curCol+1;
+
+                VisitNeighborsRecursive(node, grid);
+            }
+
+            return;
         }
     }
 }
