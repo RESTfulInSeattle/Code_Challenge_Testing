@@ -36,6 +36,8 @@ namespace Code_Challenges.PracticeProblems
 
     3
      */
+
+    /*
     public class SockMerchant
     {
         static void Main(string[] args)
@@ -47,7 +49,7 @@ namespace Code_Challenges.PracticeProblems
             Console.ReadLine();
         }
     }
-
+    */
     public class SockMerchantSolution
     {
         // Complete the sockMerchant function below.
