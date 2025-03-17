@@ -8,17 +8,31 @@ namespace Code_Challenges.Algorithms
 {
     class Dijkstras
     {
-        private Dictionary<string, HashSet<string>> _adjacencyList;
+        private Dictionary<string, List<(string neighbor, int distance)>> _adjacencyMap;
 
-        private void AddEdge(string v1, string v2)
+        public Dijkstras(Dictionary<string, List<(string neighbor, int distance)>> adjacencyMap)
         {
-            if (!_adjacencyList.ContainsKey(v1))
-            {
-                _adjacencyList[v1] = new HashSet<string>();
-            }
-            _adjacencyList[v1].Add(v2);
+            _adjacencyMap = adjacencyMap;
         }
 
+        public ShortestPath(string start, string end)
+        {
+            //Data structure to hold distances and previous neighbor
+            Dictionary<string, (int distance, string prev)> distances = new Dictionary<string, (int distance, string prev)>();
+            foreach (var kvp in _adjacencyMap)
+            {
+                distances.Add(kvp.Key, (int.MaxValue, ""));
+            }
 
+            string currentVertex = start;
+            distances[currentVertex] = (0, currentVertex);
+            List<string> visited = new List<string>();
+
+            while (visited.Count < _adjacencyMap.Count)
+            {
+                visited.Add(currentVertex);
+
+            }
+        }
     }
 }
