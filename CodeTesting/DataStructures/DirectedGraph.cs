@@ -7,7 +7,7 @@ namespace Code_Challenges.DataStructures
 {
    //Graph using adjacency list
    public class Graph
-    {
+   {
         //number of verticies
         private int _V;
 
@@ -32,4 +32,27 @@ namespace Code_Challenges.DataStructures
         }
     }
 
+    public static class GraphOperations
+    {
+        public static void GraphToAdjacency()
+        {
+            //Array of Edges (Directed) [Start, End]
+            int[,] A = new int[,]
+            {
+                    { 0, 1 },
+                    { 1, 2 },
+                    { 0, 3 },
+                    { 3, 4 },
+                    { 3, 6 },
+                    { 3, 7 },
+                    { 4, 2 },
+                    { 4, 5 },
+                    { 5, 2 }
+            };
+
+            //Convert array of edges to adjacency matrix
+
+            return;
+        }
+    }
 }
