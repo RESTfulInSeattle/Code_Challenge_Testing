@@ -36,23 +36,40 @@ namespace Code_Challenges.DataStructures
     {
         public static void GraphToAdjacency()
         {
-            //Array of Edges (Directed) [Start, End]
-            int[,] A = new int[,]
+            // Number of nodes
+            int n = 8;
+
+            // Array of Edges (Directed) [Start, End]
+            List<(int v1, int v2)> A = new List<(int v1, int v2)>
             {
-                    { 0, 1 },
-                    { 1, 2 },
-                    { 0, 3 },
-                    { 3, 4 },
-                    { 3, 6 },
-                    { 3, 7 },
-                    { 4, 2 },
-                    { 4, 5 },
-                    { 5, 2 }
+                (0, 1),
+                (1, 2),
+                (0, 3),
+                (3, 4),
+                (3, 6),
+                (3, 7),
+                (4, 2),
+                (4, 5),
+                (5, 2)
             };
 
-            //Convert array of edges to adjacency matrix
-
+            // Convert array of edges to adjacency matrix
+            int[,] adjacencyMatrix = new int[n, n];
+            foreach (var (v1, v2) in A)
+            {
+                adjacencyMatrix[v1, v2] = 1;
+            }
+            
+            //Convert array of edgest to adjacency List
+            //List of lists
+            List<List<int>> adjacencyList = new List<List<int>>(n);
+            foreach(var (v1,v2) in A)
+            {
+                adjacencyList[v1].Add(v2);
+            }
+            
             return;
+
         }
     }
 }
