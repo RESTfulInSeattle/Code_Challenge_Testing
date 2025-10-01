@@ -24,6 +24,39 @@ namespace Code_Challenges.PracticeProblems
 	• Implement
     • Verify
 
+    Brute force:
+        For each num1, num2 = target-num1
+        linear search for num2 time O(n^2)
+
+    Optimize brute force:
+        Sort the array, then binary search for num2 or 2 pointer
+
+    Once we sort the array, we could use a 2 indices (pointers). Traverse sorted array from both ends, each time summing the two numbers and comparing with target
+
+sort input
+
+leftIndex = 0;
+rightIndex = n-1; // n is size of input
+
+while leftIndex < rightIndex
+	sum = input [ leftIndex ] + input [ rightIndex ]
+	if sum == target
+		return (input [ leftIndex ], input [ rightIndex ])
+	else if ( sum > target ) // sum is bigger, so we want smaller numbers
+		-- rightIndex // we move right index towards the left
+	else
+		++ leftIndex // we want bigger numbers
+return empty set
+
+HashTable HT;
+
+for each number num1 in input
+	num2 = target - num1
+	if HT.Contains ( num2 )
+		return (num1, num2)
+	else
+		HT.Insert( num1 )
+return empty set
 
     */
     internal class SumToTarget
@@ -33,7 +66,10 @@ namespace Code_Challenges.PracticeProblems
 }
 
 
-/*Given a set of numbers, find a subset that has a target sum
+/*
+ * Original test:
+ * 
+ * Given a set of numbers, find a subset that has a target sum
 1,2,3,4  target 7 expect 3, 4
 
 left to right 7-1 = 0, 
